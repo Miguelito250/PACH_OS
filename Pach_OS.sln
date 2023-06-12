@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pach_OS", "Pach_OS\Pach_OS.csproj", "{7F8227FE-EF51-4AD1-9EB7-CB8AAE3F9DEE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F8227FE-EF51-4AD1-9EB7-CB8AAE3F9DEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F8227FE-EF51-4AD1-9EB7-CB8AAE3F9DEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F8227FE-EF51-4AD1-9EB7-CB8AAE3F9DEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F8227FE-EF51-4AD1-9EB7-CB8AAE3F9DEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A879DA0D-5A7D-4FF2-95A1-C87DB3E3BDFC}
+	EndGlobalSection
+EndGlobal
