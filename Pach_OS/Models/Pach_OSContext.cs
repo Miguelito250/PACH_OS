@@ -24,7 +24,7 @@ namespace Pach_OS.Models
         public virtual DbSet<Producto> Productos { get; set; } = null!;
         public virtual DbSet<ProductosInsumo> ProductosInsumos { get; set; } = null!;
         public virtual DbSet<Proveedore> Proveedores { get; set; } = null!;
-        public virtual DbSet<Roles> Roles { get; set; } = null!;
+        public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
         public virtual DbSet<Venta> Ventas { get; set; } = null!;
 
@@ -32,7 +32,6 @@ namespace Pach_OS.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=localhost;Initial Catalog=Pach_OS;integrated security=True; TrustServerCertificate=True");
             }
         }
@@ -42,7 +41,7 @@ namespace Pach_OS.Models
             modelBuilder.Entity<Categoria>(entity =>
             {
                 entity.HasKey(e => e.IdCategoria)
-                    .HasName("PK__categori__CD54BC5A18C86482");
+                    .HasName("PK__categori__CD54BC5A81F7CAE4");
 
                 entity.ToTable("categorias");
 
@@ -59,7 +58,7 @@ namespace Pach_OS.Models
             modelBuilder.Entity<Compra>(entity =>
             {
                 entity.HasKey(e => e.IdCompras)
-                    .HasName("PK__compras__590934902E77CB57");
+                    .HasName("PK__compras__59093490716458A2");
 
                 entity.ToTable("compras");
 
@@ -85,19 +84,17 @@ namespace Pach_OS.Models
                 entity.HasOne(d => d.IdUsuarioNavigation)
                     .WithMany(p => p.Compras)
                     .HasForeignKey(d => d.IdUsuario)
-                    .HasConstraintName("FK__compras__id_usua__1332DBDC");
+                    .HasConstraintName("FK__compras__id_usua__70DDC3D8");
             });
 
             modelBuilder.Entity<DetalleVenta>(entity =>
             {
                 entity.HasKey(e => e.IdDetalleVenta)
-                    .HasName("PK__detalleV__3C2E445C41F54292");
+                    .HasName("PK__detalleV__3C2E445C1CB5491E");
 
                 entity.ToTable("detalleVentas");
 
-                entity.Property(e => e.IdDetalleVenta)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id_detalleVenta");
+                entity.Property(e => e.IdDetalleVenta).HasColumnName("id_detalleVenta");
 
                 entity.Property(e => e.CantVendida).HasColumnName("cant_vendida");
 
@@ -113,13 +110,13 @@ namespace Pach_OS.Models
                 entity.HasOne(d => d.Venta)
                     .WithMany(p => p.DetalleVenta)
                     .HasForeignKey(d => d.VentaId)
-                    .HasConstraintName("FK__detalleVe__venta__0F624AF8");
+                    .HasConstraintName("FK__detalleVe__venta__74AE54BC");
             });
 
             modelBuilder.Entity<DetallesCompra>(entity =>
             {
                 entity.HasKey(e => e.IdDetallesCompras)
-                    .HasName("PK__Detalles__8D095AC3BB582AD8");
+                    .HasName("PK__Detalles__8D095AC31B309FF0");
 
                 entity.ToTable("Detalles_Compras");
 
@@ -138,18 +135,18 @@ namespace Pach_OS.Models
                 entity.HasOne(d => d.Compras)
                     .WithMany(p => p.DetallesCompras)
                     .HasForeignKey(d => d.ComprasId)
-                    .HasConstraintName("FK__Detalles___compr__1CBC4616");
+                    .HasConstraintName("FK__Detalles___compr__72C60C4A");
 
                 entity.HasOne(d => d.Insumos)
                     .WithMany(p => p.DetallesCompras)
                     .HasForeignKey(d => d.InsumosId)
-                    .HasConstraintName("FK__Detalles___insum__0C85DE4D");
+                    .HasConstraintName("FK__Detalles___insum__73BA3083");
             });
 
             modelBuilder.Entity<Insumo>(entity =>
             {
                 entity.HasKey(e => e.IdInsumos)
-                    .HasName("PK__insumos__B76055AE334676FE");
+                    .HasName("PK__insumos__B76055AE3393C888");
 
                 entity.ToTable("insumos");
 
@@ -177,7 +174,7 @@ namespace Pach_OS.Models
             modelBuilder.Entity<Producto>(entity =>
             {
                 entity.HasKey(e => e.IdProductos)
-                    .HasName("PK__producto__3804F4FB82FCF63B");
+                    .HasName("PK__producto__3804F4FB25165770");
 
                 entity.ToTable("productos");
 
@@ -206,7 +203,7 @@ namespace Pach_OS.Models
                 entity.HasOne(d => d.Categoria)
                     .WithMany(p => p.Productos)
                     .HasForeignKey(d => d.CategoriaId)
-                    .HasConstraintName("FK__productos__categ__04E4BC85");
+                    .HasConstraintName("FK__productos__categ__76969D2E");
             });
 
             modelBuilder.Entity<ProductosInsumo>(entity =>
@@ -222,18 +219,18 @@ namespace Pach_OS.Models
                 entity.HasOne(d => d.Insumos)
                     .WithMany()
                     .HasForeignKey(d => d.InsumosId)
-                    .HasConstraintName("FK__productos__insum__31B762FC");
+                    .HasConstraintName("FK__productos__insum__778AC167");
 
                 entity.HasOne(d => d.Productos)
                     .WithMany()
                     .HasForeignKey(d => d.ProductosId)
-                    .HasConstraintName("FK__productos__produ__30C33EC3");
+                    .HasConstraintName("FK__productos__produ__787EE5A0");
             });
 
             modelBuilder.Entity<Proveedore>(entity =>
             {
                 entity.HasKey(e => e.IdProveedor)
-                    .HasName("PK__proveedo__8D3DFE2885498D54");
+                    .HasName("PK__proveedo__8D3DFE2868128EDF");
 
                 entity.ToTable("proveedores");
 
@@ -256,13 +253,13 @@ namespace Pach_OS.Models
                 entity.HasOne(d => d.Insumos)
                     .WithMany(p => p.Proveedores)
                     .HasForeignKey(d => d.InsumosId)
-                    .HasConstraintName("FK__proveedor__insum__01142BA1");
+                    .HasConstraintName("FK__proveedor__insum__797309D9");
             });
 
-            modelBuilder.Entity<Roles>(entity =>
+            modelBuilder.Entity<Role>(entity =>
             {
                 entity.HasKey(e => e.IdRol)
-                    .HasName("PK__roles__6ABCB5E0AB6762BA");
+                    .HasName("PK__roles__6ABCB5E0FFEEDF4C");
 
                 entity.ToTable("roles");
 
@@ -277,7 +274,7 @@ namespace Pach_OS.Models
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.HasKey(e => e.IdUsuario)
-                    .HasName("PK__usuarios__4E3E04AD6BCC2B49");
+                    .HasName("PK__usuarios__4E3E04AD87E0DEBE");
 
                 entity.ToTable("usuarios");
 
@@ -334,23 +331,22 @@ namespace Pach_OS.Models
                 entity.HasOne(d => d.Rol)
                     .WithMany(p => p.Usuarios)
                     .HasForeignKey(d => d.RolId)
-                    .HasConstraintName("FK__usuarios__rol_id__00200768");
+                    .HasConstraintName("FK__usuarios__rol_id__7A672E12");
             });
 
             modelBuilder.Entity<Venta>(entity =>
             {
                 entity.HasKey(e => e.IdVentas)
-                    .HasName("PK__ventas__283C869D6C4155CE");
+                    .HasName("PK__ventas__283C869D797D922F");
 
                 entity.ToTable("ventas");
 
-                entity.Property(e => e.IdVentas)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id_ventas");
+                entity.Property(e => e.IdVentas).HasColumnName("id_ventas");
 
                 entity.Property(e => e.FechaVenta)
                     .HasColumnType("datetime")
-                    .HasColumnName("fecha_venta");
+                    .HasColumnName("fecha_venta")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Pago).HasColumnName("pago");
 
@@ -368,7 +364,7 @@ namespace Pach_OS.Models
                 entity.HasOne(d => d.Usuario)
                     .WithMany(p => p.Venta)
                     .HasForeignKey(d => d.UsuarioId)
-                    .HasConstraintName("FK__ventas__usuario___0E6E26BF");
+                    .HasConstraintName("FK__ventas__usuario___7B5B524B");
             });
 
             OnModelCreatingPartial(modelBuilder);

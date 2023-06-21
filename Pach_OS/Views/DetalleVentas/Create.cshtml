@@ -1,0 +1,70 @@
+﻿@model Pach_OS.Models.DetalleVenta
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>DetalleVenta</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    
+            <div class="form-group">
+                <label class="control-label">VentaId</label>
+                <input type="text" class="form-control" value="@ViewBag.idVentaDet" readonly name="VentaId" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Cantidad</label>
+                <input class="form-control" name="CantVendida" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label"></label>
+                <select class="form-control" asp-items="ViewBag.ProductosId" name="ProductosId"></select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary">
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+    <table class="table">
+    <thead>
+        <tr>
+            <th>
+               Cantidad Vendida
+            </th>
+            <th>
+                Producto
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var detalle in ViewBag.detalleVenta)
+        {
+            <tr>
+                <td>@detalle.CantVendida</td>
+                <td>@detalle.ProductosId</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
