@@ -23,7 +23,7 @@ namespace Pach_OS.Models
         public string? Estado { get; set; }
         public DateTime? FechaEntrada { get; set; }
 
-        public virtual Roles? Rol { get; set; }
+        public virtual Role? Rol { get; set; }
         public virtual ICollection<Compra> Compras { get; set; }
         public virtual ICollection<Venta> Venta { get; set; }
     }

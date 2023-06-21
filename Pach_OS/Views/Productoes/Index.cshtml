@@ -21,7 +21,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Estado)
             </th>
-
+            <th>
+                @Html.DisplayNameFor(model => model.TamanoPizza)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaximoSabores)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -37,7 +45,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Estado)
             </td>
-
+            <td>
+                @Html.DisplayFor(modelItem => item.TamanoPizza)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaximoSabores)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria.IdCategoria)
+            </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdProductos">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.IdProductos">Details</a> |

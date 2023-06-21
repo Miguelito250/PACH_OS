@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Pach_OS.Models
 {
-    public partial class Roles
+    public partial class Role
     {
-        public Roles()
+        public Role()
         {
             Usuarios = new HashSet<Usuario>();
         }

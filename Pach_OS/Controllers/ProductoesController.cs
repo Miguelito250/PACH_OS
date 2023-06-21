@@ -24,11 +24,7 @@ namespace Pach_OS.Controllers
             var pach_OSContext = _context.Productos.Include(p => p.Categoria);
             return View(await pach_OSContext.ToListAsync());
         }
-        public async Task<IActionResult> RegitrarInsumos()
-        {
-            var pach_OSContext = _context.Productos.Include(p => p.Categoria);
-            return View(await pach_OSContext.ToListAsync());
-        }
+
         // GET: Productoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -51,7 +47,11 @@ namespace Pach_OS.Controllers
         // GET: Productoes/Create
         public IActionResult Create()
         {
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "IdCategoria", "IdCategoria");
+            ViewBag.Categorias = _context.Categorias.Select(c => new SelectListItem
+            {
+                Value = c.IdCategoria.ToString(),
+                Text = c.NomCategoria
+            }).ToList();
             return View();
         }
 
@@ -60,7 +60,7 @@ namespace Pach_OS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdProductos,NomProducto,PrecioVenta,Estado,CategoriaId,CantInsumo,TamanoPizza,MaximoSabores")] Producto producto)
+        public async Task<IActionResult> Create([Bind("IdProductos,NomProducto,PrecioVenta,Estado,CategoriaId,TamanoPizza,MaximoSabores")] Producto producto)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace Pach_OS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdProductos,NomProducto,PrecioVenta,Estado,CategoriaId,CantInsumo,TamanoPizza,MaximoSabores")] Producto producto)
+        public async Task<IActionResult> Edit(int id, [Bind("IdProductos,NomProducto,PrecioVenta,Estado,CategoriaId,TamanoPizza,MaximoSabores")] Producto producto)
         {
             if (id != producto.IdProductos)
             {
