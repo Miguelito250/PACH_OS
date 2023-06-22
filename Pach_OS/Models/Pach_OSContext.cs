@@ -100,6 +100,10 @@ namespace Pach_OS.Models
 
                 entity.Property(e => e.ProductosId).HasColumnName("productos_id");
 
+                entity.Property(e => e.TotalPrecio).HasColumnName("totalPrecio"); // Agregar el campo totalPrecio
+
+                entity.Property(e => e.Precio).HasColumnName("precio"); // Agregar el campo precio
+
                 entity.Property(e => e.VentaId).HasColumnName("venta_id");
 
                 entity.HasOne(d => d.Productos)

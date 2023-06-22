@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Pach_OS.Models;
 
 namespace Pach_OS.Controllers
@@ -49,9 +50,9 @@ namespace Pach_OS.Controllers
         public IActionResult Create(int ventaId)
         {
             ViewBag.idVentaDet = ventaId;
-            ViewData["ProductosId"] = new SelectList(_context.Productos, "IdProductos", "IdProductos");
+            ViewData["ProductosId"] = new SelectList(_context.Productos, "IdProductos", "NomProducto");
             var detalleVenta = _context.DetalleVentas.Where(d => d.VentaId == ventaId).ToList();
-            ViewBag.detalleVenta = detalleVenta;
+            ViewBag.detalleVenta = detalleVenta; 
             ViewData["VentaId"] = new SelectList(_context.Ventas, "IdVentas", "IdVentas");
             return View(new DetalleVenta { VentaId = ventaId }); // Pasar el objeto DetalleVenta con el valor de ventaId asignado
         }
@@ -61,16 +62,26 @@ namespace Pach_OS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdDetalleVenta,VentaId,CantVendida,ProductosId")] DetalleVenta detalleVenta)
+        public async Task<IActionResult> Create(DetalleVenta detalleVenta)
         {
             if (ModelState.IsValid)
             {
+                var producto = _context.Productos.FirstOrDefault(p => p.IdProductos == detalleVenta.ProductosId);
+                if (producto != null)
+                {
+                    detalleVenta.Precio = producto.PrecioVenta;
+                    detalleVenta.TotalPrecio = detalleVenta.CantVendida * detalleVenta.Precio;
+                }
+
                 _context.Add(detalleVenta);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Create", "DetalleVentas", new { ventaId = detalleVenta.VentaId});
+
+                return RedirectToAction("Create", "DetalleVentas", new { ventaId = detalleVenta.VentaId });
             }
-            ViewData["ProductosId"] = new SelectList(_context.Productos, "IdProductos", "IdProductos", detalleVenta.ProductosId);
+
+            ViewData["ProductosId"] = new SelectList(_context.Productos, "IdProductos", "NomProducto", detalleVenta.ProductosId);
             ViewData["VentaId"] = new SelectList(_context.Ventas, "IdVentas", "IdVentas", detalleVenta.VentaId);
+
             return NotFound();
         }
 
@@ -92,12 +103,53 @@ namespace Pach_OS.Controllers
             return View(detalleVenta);
         }
 
+        // GET: DetalleVentas/ConfirmarVenta/5
+        public async Task<IActionResult> ConfirmarVenta(int? id, DetalleVenta detalleVenta)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var venta = await _context.Ventas.FindAsync(id);
+            if (venta == null)
+            {
+                return NotFound();
+            }
+
+            // Cargar los detalles de venta incluyendo la propiedad de navegación "Productos"
+            var detallesVenta = await _context.DetalleVentas
+                .Include(d => d.Productos)
+                .Where(d => d.VentaId == id)
+                .ToListAsync();
+
+            // Calcula el total de la venta sumando los precios totales de los detalles de venta
+            int totalVenta = (int)detallesVenta.Sum(d => d.Productos.PrecioVenta * d.CantVendida);
+
+            // Obtén el monto del pago a domicilio y verifica si es nulo
+            int pagoDomicilio = venta.PagoDomicilio ?? 0;
+
+            // Agrega el monto del pago a domicilio al total de la venta
+            int totalConDomicilio = totalVenta + pagoDomicilio;
+
+            // Asigna el total de la venta a la propiedad TotalVenta del modelo Venta
+            venta.TotalVenta = totalConDomicilio;
+
+            // Guarda los cambios en la base de datos
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Edit", "Ventas", new { id = id});
+        }
+
+
+
+
         // POST: DetalleVentas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdDetalleVenta,VentaId,CantVendida,ProductosId")] DetalleVenta detalleVenta)
+        public async Task<IActionResult> Edit(int id, [Bind("IdDetalleVenta,VentaId,CantVendida,ProductosId, Precio, TotalPrecio")] DetalleVenta detalleVenta)
         {
             if (id != detalleVenta.IdDetalleVenta)
             {
@@ -165,7 +217,7 @@ namespace Pach_OS.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Create", "DetalleVentas", new { ventaId = detalleVenta.VentaId });
         }
 
         private bool DetalleVentaExists(int id)

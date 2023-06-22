@@ -41,7 +41,7 @@ namespace Pach_OS.Controllers
                 return NotFound();
             }
 
-            return View(venta);
+            return RedirectToAction("Create", "DetalleVentas", new { id= id});
         }
 
         // GET: Ventas/Create

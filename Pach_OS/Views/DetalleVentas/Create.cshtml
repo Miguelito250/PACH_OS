@@ -8,63 +8,106 @@
 
 <h4>DetalleVenta</h4>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    
+
             <div class="form-group">
                 <label class="control-label">VentaId</label>
                 <input type="text" class="form-control" value="@ViewBag.idVentaDet" readonly name="VentaId" />
             </div>
 
             <div class="form-group">
+                <label class="control-label">Producto</label>
+                <select class="form-control" asp-items="ViewBag.ProductosId" name="ProductosId" onchange="updatePrice()">
+                    <option value="">Seleccione un producto</option>
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label class="control-label">Cantidad</label>
-                <input class="form-control" name="CantVendida" />
+                <input class="form-control" name="CantVendida" onchange="updatePrice()" />
             </div>
 
             <div class="form-group">
                 <label class="control-label"></label>
-                <select class="form-control" asp-items="ViewBag.ProductosId" name="ProductosId"></select>
+                <input type="hidden" class="form-control" name="Precio" readonly />
             </div>
 
             <div class="form-group">
-                <input type="submit" class="btn btn-primary">
+                <label class="control-label"></label>
+                <input type="hidden" class="form-control" name="TotalPrecio" readonly />
             </div>
 
-
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Agregar detalle" />
+            </div>
         </form>
+    </div>
+    <div class="col-md-8">
+        <h4>Detalles de Venta</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var detalle in ViewBag.detalleVenta)
+                {
+                    <tr>
+                        <td>@detalle.Productos.NomProducto</td>
+                        <td>@detalle.CantVendida</td>
+                        <td>@detalle.TotalPrecio</td>
+                        <td><a asp-action="Delete" asp-route-id="@detalle.IdDetalleVenta">Delete</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
 
-    <table class="table">
-    <thead>
-        <tr>
-            <th>
-               Cantidad Vendida
-            </th>
-            <th>
-                Producto
-            </th>
-            
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var detalle in ViewBag.detalleVenta)
-        {
-            <tr>
-                <td>@detalle.CantVendida</td>
-                <td>@detalle.ProductosId</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
 <div>
     <a asp-action="Index">Back to List</a>
+    <!-- Botón para llamar al método ConfirmarVenta -->
+    <a asp-action="ConfirmarVenta" asp-route-id="@ViewBag.idVentaDet" class="btn btn-primary">Confirmar Venta</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function updatePrice() {
+            var productoId = document.getElementsByName("ProductosId")[0].value;
+            var cantidad = document.getElementsByName("CantVendida")[0].value;
+
+            var producto = getProductById(productoId);
+
+            if (producto && cantidad) {
+                var precio = producto.PrecioVenta;
+                var total = precio * cantidad;
+
+                document.getElementsByName("Precio")[0].value = precio;
+                document.getElementsByName("TotalPrecio")[0].value = total;
+            } else {
+                document.getElementsByName("Precio")[0].value = "";
+                document.getElementsByName("TotalPrecio")[0].value = "";
+            }
+        }
+
+        function getProductById(id) {
+            var productos = @Html.Raw(Json.Serialize(ViewBag.Productos));
+
+            for (var i = 0; i < productos.length; i++) {
+                if (productos[i].IdProductos == id) {
+                    return productos[i];
+                }
+            }
+
+            return null;
+        }
+    </script>
 }
