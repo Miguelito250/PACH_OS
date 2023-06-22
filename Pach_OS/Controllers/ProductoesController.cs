@@ -66,7 +66,7 @@ namespace Pach_OS.Controllers
             {
                 _context.Add(producto);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create", "ProductosInsumoes", new { id= producto.IdProductos });
             }
             ViewData["CategoriaId"] = new SelectList(_context.Categorias, "IdCategoria", "IdCategoria", producto.CategoriaId);
             return View(producto);

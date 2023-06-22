@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Pach_OS.Models;
 
 namespace Pach_OS.Controllers
@@ -46,8 +47,12 @@ namespace Pach_OS.Controllers
         }
 
         // GET: ProductosInsumoes/Create
-        public IActionResult Create()
+        public IActionResult Create(int id )
         {
+            ViewBag.productosInsumo = id;
+            var productosInsumoList = _context.ProductosInsumos.Where(d => d.ProductosId == id).ToList();
+
+            ViewBag.detallesProInsumos = productosInsumoList;
             ViewData["InsumosId"] = new SelectList(_context.Insumos, "IdInsumos", "IdInsumos");
             ViewData["ProductosId"] = new SelectList(_context.Productos, "IdProductos", "IdProductos");
             return View("Create");
@@ -66,9 +71,8 @@ namespace Pach_OS.Controllers
                 await _context.SaveChangesAsync();
 
                 // Obtener la lista actualizada de "ProductosInsumo"
-                var productosInsumoList = await _context.ProductosInsumos.ToListAsync();
+                
 
-                // Devolver la vista parcial "_TablaProductosInsumo" con la lista actualizada
                 return View("Create");
             }
             ViewData["InsumosId"] = new SelectList(_context.Insumos, "IdInsumos", "IdInsumos", productosInsumo.InsumosId);

@@ -14,7 +14,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ProductosId" class="control-label"></label>
-                <select asp-for="ProductosId" class ="form-control" asp-items="ViewBag.ProductosId"></select>
+                <input asp-for="ProductosId" class="form-control" value="@ViewBag.productosInsumo" readonly />
             </div>
             <div class="form-group">
                 <label asp-for="InsumosId" class="control-label"></label>
@@ -30,7 +30,28 @@
             </div>
         </form>
         <div id="tablaProductosInsumo">
-            <partial name="_TablaProductosInsumo" />
+            <table>
+                <thead>
+                    <tr>
+                        <th>producto</th>
+                        <th>insumo</th>
+                        <th>Cantidad</th>
+                        <th>Accion</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var detalle in ViewBag.detallesProInsumos)
+                    {
+                        <tr>
+                            <td>@detalle.Producto.NomProducto</td>
+                            <td>@detalle.InsumosId</td>
+                            <td>@detalle.CantInsumo</td>
+                            <td><a asp-action="Delete" asp-route-id="@detalle.Id">Delete</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
 
         </div>
     </div>
