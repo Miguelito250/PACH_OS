@@ -8,6 +8,7 @@ namespace Pach_OS.Models
         public Insumo()
         {
             DetallesCompras = new HashSet<DetallesCompra>();
+            ProductosInsumos = new HashSet<ProductosInsumo>();
             Proveedores = new HashSet<Proveedore>();
         }
 
@@ -18,6 +19,7 @@ namespace Pach_OS.Models
         public string? TiempoLlegado { get; set; }
 
         public virtual ICollection<DetallesCompra> DetallesCompras { get; set; }
+        public virtual ICollection<ProductosInsumo> ProductosInsumos { get; set; }
         public virtual ICollection<Proveedore> Proveedores { get; set; }
     }
 }
