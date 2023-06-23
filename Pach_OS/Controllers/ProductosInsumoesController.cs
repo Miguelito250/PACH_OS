@@ -22,8 +22,7 @@ namespace Pach_OS.Controllers
         // GET: ProductosInsumoes
         public async Task<IActionResult> Index()
         {
-            var pach_OSContext = _context.ProductosInsumos.Include(p => p.Insumos).Include(p => p.Productos);
-            return View(await pach_OSContext.ToListAsync());
+            return RedirectToAction("Index", "Productoes");
         }
 
         // GET: ProductosInsumoes/Details/5
@@ -63,22 +62,21 @@ namespace Pach_OS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductosId,InsumosId,CantInsumo,Id")] ProductosInsumo productosInsumo)
+        public async Task<IActionResult> Create([Bind("ProductosId,InsumosId,CantInsumo")] ProductosInsumo productosInsumo)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(productosInsumo);
                 await _context.SaveChangesAsync();
 
-                // Obtener la lista actualizada de "ProductosInsumo"
-                
-
-                return View("Create");
+                return RedirectToAction("Create", "ProductosInsumoes", new { idProInsumo = productosInsumo.ProductosId });
             }
+
             ViewData["InsumosId"] = new SelectList(_context.Insumos, "IdInsumos", "IdInsumos", productosInsumo.InsumosId);
             ViewData["ProductosId"] = new SelectList(_context.Productos, "IdProductos", "IdProductos", productosInsumo.ProductosId);
-            return View("Create");
+            return View(productosInsumo);
         }
+
 
         // GET: ProductosInsumoes/Edit/5
         public async Task<IActionResult> Edit(int? id)

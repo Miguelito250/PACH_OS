@@ -209,23 +209,23 @@ namespace Pach_OS.Models
             {
                 entity.ToTable("productos_insumos");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.HasKey(e => e.Id).HasName("PK__producto__3214EC27EBD61552");
 
                 entity.Property(e => e.CantInsumo).HasColumnName("cant_insumo");
 
-                entity.Property(e => e.InsumosId).HasColumnName("insumos_id");
+                entity.Property(e => e.InsumosId).HasColumnName("insumosID");
 
-                entity.Property(e => e.ProductosId).HasColumnName("productos_id");
+                entity.Property(e => e.ProductosId).HasColumnName("productosId");
 
                 entity.HasOne(d => d.Insumos)
                     .WithMany(p => p.ProductosInsumos)
                     .HasForeignKey(d => d.InsumosId)
-                    .HasConstraintName("FK__productos__insum__5070F446");
+                    .HasConstraintName("FK__productos__insum__60A75C0F");
 
                 entity.HasOne(d => d.Productos)
                     .WithMany(p => p.ProductosInsumos)
                     .HasForeignKey(d => d.ProductosId)
-                    .HasConstraintName("FK__productos__produ__5165187F");
+                    .HasConstraintName("FK__productos__produ__5FB337D6");
             });
 
             modelBuilder.Entity<Proveedore>(entity =>

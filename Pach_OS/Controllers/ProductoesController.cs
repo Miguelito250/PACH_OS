@@ -156,6 +156,13 @@ namespace Pach_OS.Controllers
             var producto = await _context.Productos.FindAsync(id);
             if (producto != null)
             {
+                var productosInsumoList = _context.ProductosInsumos.Where(d => d.ProductosId == id).ToList();
+                foreach (var i in productosInsumoList) { 
+                    if(i.ProductosId == id)
+                    {
+                        _context.ProductosInsumos.Remove(i);
+                    }
+                }
                 _context.Productos.Remove(producto);
             }
             
