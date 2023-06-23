@@ -35,7 +35,8 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+
+            <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.FechaVenta)
             </td>
@@ -55,11 +56,9 @@
                 @Html.DisplayFor(modelItem => item.Usuario.IdUsuario)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdVentas">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdVentas">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdVentas">Delete</a>
+                <a href="/DetalleVentas/Create?ventaId=@item.IdVentas">Details</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

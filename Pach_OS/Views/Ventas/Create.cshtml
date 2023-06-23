@@ -22,23 +22,26 @@
                 <select asp-for="UsuarioId" class ="form-control" asp-items="ViewBag.UsuarioId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="TotalVenta" class="control-label"></label>
-                <input asp-for="TotalVenta" class="form-control" />
+                
+                <input asp-for="TotalVenta" class="form-control" type="hidden"/>
                 <span asp-validation-for="TotalVenta" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TipoPago" class="control-label"></label>
-                <input asp-for="TipoPago" class="form-control" />
+                <select asp-for="TipoPago" class="form-control" required>
+                    <option value="Efectivo" selected>Efectivo</option>
+                    <option value="Transferencia">Transferencia</option>
+                </select>
                 <span asp-validation-for="TipoPago" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Pago" class="control-label"></label>
-                <input asp-for="Pago" class="form-control" />
+                
+                <input asp-for="Pago" class="form-control" type="hidden"/>
                 <span asp-validation-for="Pago" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PagoDomicilio" class="control-label"></label>
-                <input asp-for="PagoDomicilio" class="form-control" />
+                <input asp-for="PagoDomicilio" class="form-control" required/>
                 <span asp-validation-for="PagoDomicilio" class="text-danger"></span>
             </div>
             <div class="form-group">
