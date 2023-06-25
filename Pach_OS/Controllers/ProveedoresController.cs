@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Pacho_OS.Models;
+using Pach_OS.Models;
 
-namespace Pacho_OS.Controllers
+namespace WebApplication1.Controllers
 {
     public class ProveedoresController : Controller
     {
@@ -32,6 +32,11 @@ namespace Pacho_OS.Controllers
             {
                 return NotFound();
             }
+
+            ViewBag.IdInsumos = id;
+            ViewData["InsumosId"] = new SelectList(_context.Insumos, "IdInsumos", "IdInsumos");
+            var insumosProveedor = _context.Proveedores.Where(d => d.IdProveedor == id).ToList();
+            ViewBag.InsumosProveedor = insumosProveedor;
 
             var proveedore = await _context.Proveedores
                 .Include(p => p.Insumos)
