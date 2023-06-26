@@ -7,8 +7,10 @@ namespace Pach_OS.Models
 {
     public partial class ProductosInsumo
     {
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         public int Id { get; set; }
         public int? ProductosId { get; set; }
         public int? CantInsumo { get; set; }
