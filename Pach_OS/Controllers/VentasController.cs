@@ -41,7 +41,7 @@ namespace Pach_OS.Controllers
                 return NotFound();
             }
 
-            return RedirectToAction("Create", "DetalleVentas", new { id= id});
+            return RedirectToAction("Create", "DetalleVentas", new { id = id });
         }
 
         // GET: Ventas/Create
@@ -157,14 +157,14 @@ namespace Pach_OS.Controllers
             {
                 _context.Ventas.Remove(venta);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool VentaExists(int id)
         {
-          return (_context.Ventas?.Any(e => e.IdVentas == id)).GetValueOrDefault();
+            return (_context.Ventas?.Any(e => e.IdVentas == id)).GetValueOrDefault();
         }
     }
 }

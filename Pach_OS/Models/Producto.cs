@@ -8,6 +8,7 @@ namespace Pach_OS.Models
         public Producto()
         {
             DetalleVenta = new HashSet<DetalleVenta>();
+            ProductosInsumos = new HashSet<ProductosInsumo>();
         }
 
         public int IdProductos { get; set; }
@@ -15,11 +16,11 @@ namespace Pach_OS.Models
         public int? PrecioVenta { get; set; }
         public string? Estado { get; set; }
         public int? CategoriaId { get; set; }
-        public int? CantInsumo { get; set; }
         public byte? TamanoPizza { get; set; }
         public byte? MaximoSabores { get; set; }
 
         public virtual Categoria? Categoria { get; set; }
         public virtual ICollection<DetalleVenta> DetalleVenta { get; set; }
+        public virtual ICollection<ProductosInsumo> ProductosInsumos { get; set; }
     }
 }

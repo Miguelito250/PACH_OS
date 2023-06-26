@@ -52,7 +52,7 @@ namespace Pach_OS.Controllers
             ViewBag.idVentaDet = ventaId;
             ViewData["ProductosId"] = new SelectList(_context.Productos, "IdProductos", "NomProducto");
             var detalleVenta = _context.DetalleVentas.Where(d => d.VentaId == ventaId).ToList();
-            ViewBag.detalleVenta = detalleVenta; 
+            ViewBag.detalleVenta = detalleVenta;
             ViewData["VentaId"] = new SelectList(_context.Ventas, "IdVentas", "IdVentas");
             return View(new DetalleVenta { VentaId = ventaId }); // Pasar el objeto DetalleVenta con el valor de ventaId asignado
         }
@@ -67,23 +67,45 @@ namespace Pach_OS.Controllers
             if (ModelState.IsValid)
             {
                 var producto = _context.Productos.FirstOrDefault(p => p.IdProductos == detalleVenta.ProductosId);
+
                 if (producto != null)
                 {
-                    detalleVenta.Precio = producto.PrecioVenta;
-                    detalleVenta.TotalPrecio = detalleVenta.CantVendida * detalleVenta.Precio;
+                    var receta = _context.ProductosInsumos.Where(pi => pi.ProductosId == producto.IdProductos).ToList();
+
+                    foreach (var insumoReceta in receta)
+                    {
+                        var insumo = _context.Insumos.FirstOrDefault(i => i.IdInsumos == insumoReceta.InsumosId);
+                        var cantidadInsumo = insumo != null ? insumo.CantInsumo : 0;
+                        var cantidadNecesaria = insumoReceta.CantInsumo * detalleVenta.CantVendida;
+
+                        if (cantidadNecesaria > cantidadInsumo)
+                        {
+                            ModelState.AddModelError("", $"No hay suficientes insumos ({insumo?.NomInsumo}) disponibles para este producto.");
+                            return RedirectToAction("Create", "DetalleVentas", new { ventaId = detalleVenta.VentaId });
+                        }
+
+                        // Actualizar la cantidad de insumo en la tabla Insumos
+                        insumo.CantInsumo -= cantidadNecesaria;
+                        _context.Update(insumo);
+                    }
+
+                    _context.Add(detalleVenta);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction("Create", "DetalleVentas", new { ventaId = detalleVenta.VentaId });
                 }
-
-                _context.Add(detalleVenta);
-                await _context.SaveChangesAsync();
-
-                return RedirectToAction("Create", "DetalleVentas", new { ventaId = detalleVenta.VentaId });
+                else
+                {
+                    ModelState.AddModelError("", "El producto seleccionado no existe.");
+                }
             }
 
             ViewData["ProductosId"] = new SelectList(_context.Productos, "IdProductos", "NomProducto", detalleVenta.ProductosId);
             ViewData["VentaId"] = new SelectList(_context.Ventas, "IdVentas", "IdVentas", detalleVenta.VentaId);
 
-            return NotFound();
+            return RedirectToAction("Create", "DetalleVentas", new { ventaId = detalleVenta.VentaId });
         }
+
 
         // GET: DetalleVentas/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -138,7 +160,7 @@ namespace Pach_OS.Controllers
             // Guarda los cambios en la base de datos
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Edit", "Ventas", new { id = id});
+            return RedirectToAction("Edit", "Ventas", new { id = id });
         }
 
 
@@ -215,14 +237,14 @@ namespace Pach_OS.Controllers
             {
                 _context.DetalleVentas.Remove(detalleVenta);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction("Create", "DetalleVentas", new { ventaId = detalleVenta.VentaId });
         }
 
         private bool DetalleVentaExists(int id)
         {
-          return (_context.DetalleVentas?.Any(e => e.IdDetalleVenta == id)).GetValueOrDefault();
+            return (_context.DetalleVentas?.Any(e => e.IdDetalleVenta == id)).GetValueOrDefault();
         }
     }
 }
