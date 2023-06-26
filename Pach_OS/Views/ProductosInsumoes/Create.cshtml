@@ -1,0 +1,79 @@
+﻿@model Pach_OS.Models.ProductosInsumo
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>ProductosInsumo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form id="createForm" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProductosId" class="control-label"></label>
+                <input asp-for="ProductosId" class="form-control" value="@ViewBag.productosInsumo" readonly>
+            </div>
+            <div class="form-group">
+                <label asp-for="InsumosId" class="control-label"></label>
+                <select asp-for="InsumosId" class ="form-control" asp-items="ViewBag.InsumosId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CantInsumo" class="control-label"></label>
+                <input asp-for="CantInsumo" class="form-control" />
+                <span asp-validation-for="CantInsumo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+        <div id="tablaProductosInsumo">
+            <table>
+                <thead>
+                    <tr>
+                        <th>producto</th>
+                        <th>insumo</th>
+                        <th>Cantidad</th>
+                        <th>Accion</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var detalle in ViewBag.detallesProInsumos)
+                    {
+                        <tr>
+                            <td>@detalle.ProductosId</td>
+                            <td>@detalle.InsumosId</td>
+                            <td>@detalle.CantInsumo</td>
+                            <td><a asp-action="Delete" asp-route-id="@detalle.Id">Delete</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <a asp-action="Index">volver</a>
+</div>
+<script>
+    $(function () {
+        $('#createForm').submit(function (e) {
+            e.preventDefault(); // Evitar la solicitud de página completa
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $(this).serialize(),
+                success: function (result) {
+                    $('#tablaProductosInsumo').html(result); // Actualizar el contenido de la tabla
+                    $('#createForm')[0].reset(); // Restablecer el formulario
+                }
+            });
+        });
+    });
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
