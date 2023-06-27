@@ -6,76 +6,67 @@
     <title>@ViewData["Title"] - Pach_OS</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Pach_OS.styles.css" asp-append-version="true" />
-
-          <!-- Google Font: Source Sans Pro -->
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-      <!-- Font Awesome Icons -->
-      <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-      <!-- IonIcons -->
-      <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-      <!-- Theme style -->
-      <link rel="stylesheet" href="~/wwwroot/adminLTE/css/adminlte.min.css">
+    <link rel="stylesheet" href="~/Pach_OS.styles.css" asp-append-version="true" /> 
 </head>
-<body>
-    <div class="wrapper">
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
-    </a>
+<body style="padding-left: 30px">
+    <header>
+        <nav class="navbar navbar-light bg-light fixed-top">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#desplegar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-start text-white" style="background: #381F12; width: 220px" tabindex="-1" id="desplegar" aria-labelledby="menu">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="menu">Pach_OS</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body d-flex flex-column flex-shrink-0 p-3">
+                        <ul class="nav nav-pills flex-column mb-auto">
+                            <hr />
+                            <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Informe</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Ventas" asp-action="Index">Ventas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Productoes" asp-action="Index">Productos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Insumoes" asp-action="Index">Insumos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Compras" asp-action="Index">Compras</a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Users" asp-action="Index">Usuarios</a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Proveedores" asp-action="Index">Proveedores</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-       <ul> 
-            <li class="nav-item">
-                <a href="pages/gallery.html" class="nav-link">
-                    <i class="nav-icon far fa-image"></i>
-                    <p>
-                    Gallery
-                    </p>
-                </a>
-            </li>
-        </ul>
-      
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
-    </div>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
+    
+            <div class="col-md-10">
+                <!-- Contenido principal -->
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+       
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - Pach_OS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
-    
-<!-- REQUIRED SCRIPTS -->
-
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE -->
-<script src="dist/js/adminlte.js"></script>
-
-<!-- OPTIONAL SCRIPTS -->
-<script src="plugins/chart.js/Chart.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard3.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
