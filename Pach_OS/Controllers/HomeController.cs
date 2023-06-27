@@ -2,17 +2,32 @@
 using Microsoft.EntityFrameworkCore;
 using Pach_OS.Models;
 using System.Diagnostics;
-using Pach_OS.Models;
+using Pach_OS.Models.ViewModels;
 
 namespace Pach_OS.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly Pach_OSContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(Pach_OSContext context)
         {
-            _logger = logger;
+            _context = context;
+        }
+        public IActionResult ResumenVenta()
+{
+            DateTime fechainicion = DateTime.Now;
+            fechainicion = fechainicion.AddDays(-5);
+            List<VMVenta> Lista = (from tbventa in _context.Ventas
+                                    where tbventa.FechaVenta.Value.Date >= fechainicion.Date
+                                    group tbventa by tbventa.FechaVenta.Value.Date into grupo
+                                    select new VMVenta
+                                    {
+                                        fecha = grupo.Key.ToString("dd/MM/yyyy"),
+                                        pago = grupo.Count(),
+                                    }).ToList();
+
+            return StatusCode(StatusCodes.Status200OK, Lista);
         }
 
         public IActionResult Index()
