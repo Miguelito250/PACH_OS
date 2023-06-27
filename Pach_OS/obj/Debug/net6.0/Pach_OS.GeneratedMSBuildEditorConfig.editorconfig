@@ -16,12 +16,60 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Camilo Olea\Desktop\Ejercicio.Net\Pacho_OS\PACH_OS\Pach_OS
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Camilo Olea/Desktop/Ejercicio.Net/Pacho_OS/PACH_OS/Pach_OS/Views/DetalleVentas/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV0YWxsZVZlbnRhc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Camilo Olea/Desktop/Ejercicio.Net/Pacho_OS/PACH_OS/Pach_OS/Views/DetalleVentas/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV0YWxsZVZlbnRhc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Camilo Olea/Desktop/Ejercicio.Net/Pacho_OS/PACH_OS/Pach_OS/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Camilo Olea/Desktop/Ejercicio.Net/Pacho_OS/PACH_OS/Pach_OS/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Camilo Olea/Desktop/Ejercicio.Net/Pacho_OS/PACH_OS/Pach_OS/Views/Productoes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9lc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Camilo Olea/Desktop/Ejercicio.Net/Pacho_OS/PACH_OS/Pach_OS/Views/Productoes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9lc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Camilo Olea/Desktop/Ejercicio.Net/Pacho_OS/PACH_OS/Pach_OS/Views/Productoes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9lc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Camilo Olea/Desktop/Ejercicio.Net/Pacho_OS/PACH_OS/Pach_OS/Views/Productoes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9lc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Camilo Olea/Desktop/Ejercicio.Net/Pacho_OS/PACH_OS/Pach_OS/Views/Productoes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9lc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Camilo Olea/Desktop/Ejercicio.Net/Pacho_OS/PACH_OS/Pach_OS/Views/ProductosInsumoes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9zSW5zdW1vZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Camilo Olea/Desktop/Ejercicio.Net/Pacho_OS/PACH_OS/Pach_OS/Views/ProductosInsumoes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9zSW5zdW1vZXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Camilo Olea/Desktop/Ejercicio.Net/Pacho_OS/PACH_OS/Pach_OS/Views/ProductosInsumoes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9zSW5zdW1vZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Camilo Olea/Desktop/Ejercicio.Net/Pacho_OS/PACH_OS/Pach_OS/Views/ProductosInsumoes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9zSW5zdW1vZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Camilo Olea/Desktop/Ejercicio.Net/Pacho_OS/PACH_OS/Pach_OS/Views/ProductosInsumoes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9zSW5zdW1vZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Camilo Olea/Desktop/Ejercicio.Net/Pacho_OS/PACH_OS/Pach_OS/Views/Proveedores/Create.cshtml]
@@ -50,6 +98,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Camilo Olea/Desktop/Ejercicio.Net/Pacho_OS/PACH_OS/Pach_OS/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Camilo Olea/Desktop/Ejercicio.Net/Pacho_OS/PACH_OS/Pach_OS/Views/Ventas/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVudGFzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Camilo Olea/Desktop/Ejercicio.Net/Pacho_OS/PACH_OS/Pach_OS/Views/Ventas/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVudGFzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Camilo Olea/Desktop/Ejercicio.Net/Pacho_OS/PACH_OS/Pach_OS/Views/Ventas/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVudGFzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Camilo Olea/Desktop/Ejercicio.Net/Pacho_OS/PACH_OS/Pach_OS/Views/_ViewImports.cshtml]

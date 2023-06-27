@@ -1,0 +1,44 @@
+﻿@model Pach_OS.Models.ProductosInsumo
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>ProductosInsumo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProductosId" class="control-label"></label>
+                <select asp-for="ProductosId" class="form-control" asp-items="ViewBag.ProductosId"></select>
+                <span asp-validation-for="ProductosId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InsumosId" class="control-label"></label>
+                <select asp-for="InsumosId" class="form-control" asp-items="ViewBag.InsumosId"></select>
+                <span asp-validation-for="InsumosId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CantInsumo" class="control-label"></label>
+                <input asp-for="CantInsumo" class="form-control" />
+                <span asp-validation-for="CantInsumo" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
