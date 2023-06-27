@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Pach_OS.Models;
@@ -17,31 +13,15 @@ namespace Pach_OS.Controllers
         {
             _context = context;
         }
-
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var pach_OSContext = _context.Compras.Include(c => c.IdProveedorNavigation).Include(c => c.IdUsuarioNavigation);
-            return View(await pach_OSContext.ToListAsync());
+            IEnumerable<Compra> ListCompras = _context.Compras.Include(c => c.IdProveedorNavigation).Include(c => c.IdUsuarioNavigation);
+            return View(ListCompras);
         }
 
-        // GET: Login
-        //public async Task<IActionResult> Index()
-        //{
-        //    if (!User.Identity.IsAuthenticated)
-        //    {
-        //        return Redirect("/Identity/Account/Login");
-        //    }
-        //    else
-        //    {
-        //        var pach_OSContext = _context.Compras.Include(c => c.IdProveedorNavigation).Include(c => c.IdUsuarioNavigation);
-        //        return View(await pach_OSContext.ToListAsync());
-        //    }
-        //}
-
-        // GET: Compras/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? IdCompra)
         {
-            if (id == null || _context.Compras == null)
+            if (IdCompra == null || _context.Compras == null)
             {
                 return NotFound();
             }
@@ -49,7 +29,7 @@ namespace Pach_OS.Controllers
             var compra = await _context.Compras
                 .Include(c => c.IdProveedorNavigation)
                 .Include(c => c.IdUsuarioNavigation)
-                .FirstOrDefaultAsync(m => m.IdCompras == id);
+                .FirstOrDefaultAsync(m => m.IdCompras == IdCompra);
             if (compra == null)
             {
                 return NotFound();
@@ -58,31 +38,72 @@ namespace Pach_OS.Controllers
                 .Where(x => x.ComprasId == compra.IdCompras)
                 .Include(v => v.Insumos)
                 .ToListAsync();
-            return RedirectToAction("Create", "DetallesCompras", new { compraId = compra.IdCompras });
+            return RedirectToAction("Index");
         }
 
-        // GET: Compras/Create
         public IActionResult Create()
         {
-            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "IdProveedor");
-            ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "IdUsuario", "IdUsuario");
+            ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "IdUsuario", "IdUsuario", "NumDocumento");
+            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "IdProveedor", "Nit");
             return View();
         }
 
-        // POST: Compras/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCompras,IdUsuario,FechaCompra,Total,IdProveedor")] Compra compra)
+        public async Task<IActionResult> Create(Compra compra)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(compra);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Create", "DetallesCompras", new { compraId = compra.IdCompras });
+                return RedirectToAction("CreateDetalles", "Compras", new { compraId = compra.IdCompras });
             }
-            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "IdProveedor", compra.IdProveedor);
-            ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "IdUsuario", "IdUsuario", compra.IdUsuario);
+            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "Nit", "Nit", compra.IdProveedor);
+            ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "NumDocumento", "NumDocumento", compra.IdUsuario);
             return View(compra);
+        }
+
+        public IActionResult CreateDetalles()
+        {
+            ViewData["InsumosId"] = new SelectList(_context.Insumos, "IdInsumos", "IdInsumos");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateDetalles(DetallesCompra detalle)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(detalle);
+                await _context.SaveChangesAsync();
+
+                var insumo = _context.Insumos.FirstOrDefault(c => c.IdInsumos == detalle.InsumosId);
+
+                if (insumo != null)
+                {
+                    detalle.PrecioInsumo = detalle.PrecioInsumo * detalle.Cantidad;
+
+                    insumo.CantInsumo += detalle.Cantidad;
+                    _context.Insumos.Update(insumo);
+
+                    var compras = await _context.Compras.FindAsync(detalle.ComprasId);
+                    compras.Total = 0;
+                    foreach (var item in await _context.DetallesCompras.Where(c => c.ComprasId == detalle.ComprasId).ToListAsync())
+                    {
+                        compras.Total += item.PrecioInsumo;
+                    }
+                    _context.Compras.Update(compras);
+
+                    await _context.SaveChangesAsync();
+
+                }
+
+                return RedirectToAction("Index");
+            }
+
+            ViewData["InsumosId"] = new SelectList(_context.Insumos, "NomInsumo", "NomInsumo", detalle.InsumosId);
+            return RedirectToAction("Index");
         }
     }
 }
