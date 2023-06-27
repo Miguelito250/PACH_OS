@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Pach_OS.Models;
 using System.Diagnostics;
 
@@ -17,6 +18,17 @@ namespace Pach_OS.Controllers
         {
             return View();
         }
+        //public IActionResult Index()
+        //{
+        //    if (!User.Identity.IsAuthenticated)
+        //    {
+        //        return Redirect("/Identity/Account/Login");
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
+        //}
 
         public IActionResult Privacy()
         {

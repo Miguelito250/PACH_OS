@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Pach_OS.Models;
 
 namespace Pach_OS.Controllers
@@ -19,19 +18,26 @@ namespace Pach_OS.Controllers
             _context = context;
         }
 
-        // GET: DetallesCompras
         public async Task<IActionResult> Index()
         {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return Redirect("/Identity/Account/Login");
-            }
-            else
-            {
-                var pach_OSContext = _context.DetallesCompras.Include(d => d.Compras).Include(d => d.Insumos);
-                return View(await pach_OSContext.ToListAsync());
-            }
+            var pach_OSContext = _context.DetallesCompras.Include(d => d.Compras).Include(d => d.Insumos);
+            return View(await pach_OSContext.ToListAsync());
         }
+
+        // GET: Login
+        //public async Task<IActionResult> Index()
+        //{
+        //    if (!User.Identity.IsAuthenticated)
+        //    {
+        //        return Redirect("/Identity/Account/Login");
+        //    }
+        //    else
+        //    {
+        //        var pach_OSContext = _context.DetallesCompras.Include(d => d.Compras).Include(d => d.Insumos);
+        //        return View(await pach_OSContext.ToListAsync());
+        //    }
+        //}
+
         // GET: DetallesCompras/Create
         public IActionResult Create(int compraId)
         {

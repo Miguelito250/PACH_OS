@@ -17,21 +17,27 @@ namespace Pach_OS.Controllers
         {
             _context = context;
         }
-
-        // GET: Insumos
         public async Task<IActionResult> Index()
         {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return Redirect("/Identity/Account/Login");
-            }
-            else
-            {
-                return _context.Insumos != null ?
+            return _context.Insumos != null ?
                         View(await _context.Insumos.ToListAsync()) :
                         Problem("Entity set 'Pach_OSContext.Insumos'  is null.");
-            }
         }
+
+        // GET: Login
+        //public async Task<IActionResult> Index()
+        //{
+        //    if (!User.Identity.IsAuthenticated)
+        //    {
+        //        return Redirect("/Identity/Account/Login");
+        //    }
+        //    else
+        //    {
+        //        return _context.Insumos != null ?
+        //                View(await _context.Insumos.ToListAsync()) :
+        //                Problem("Entity set 'Pach_OSContext.Insumos'  is null.");
+        //    }
+        //}
 
         // GET: Insumos/Create
         public IActionResult Create()
@@ -48,9 +54,9 @@ namespace Pach_OS.Controllers
             {
                 _context.Add(insumo);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "DetallesCompras");
+                return RedirectToAction("Index", "Compras");
             }
-            return RedirectToAction("Index", "DetallesCompras");
+            return RedirectToAction("Index", "Compras");
         }
     }
 }

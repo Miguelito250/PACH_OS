@@ -18,19 +18,25 @@ namespace Pach_OS.Controllers
             _context = context;
         }
 
-        // GET: Compras
         public async Task<IActionResult> Index()
         {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return Redirect("/Identity/Account/Login");
-            }
-            else
-            {
-                var pach_OSContext = _context.Compras.Include(c => c.IdProveedorNavigation).Include(c => c.IdUsuarioNavigation);
-                return View(await pach_OSContext.ToListAsync());
-            }
+            var pach_OSContext = _context.Compras.Include(c => c.IdProveedorNavigation).Include(c => c.IdUsuarioNavigation);
+            return View(await pach_OSContext.ToListAsync());
         }
+
+        // GET: Login
+        //public async Task<IActionResult> Index()
+        //{
+        //    if (!User.Identity.IsAuthenticated)
+        //    {
+        //        return Redirect("/Identity/Account/Login");
+        //    }
+        //    else
+        //    {
+        //        var pach_OSContext = _context.Compras.Include(c => c.IdProveedorNavigation).Include(c => c.IdUsuarioNavigation);
+        //        return View(await pach_OSContext.ToListAsync());
+        //    }
+        //}
 
         // GET: Compras/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -78,6 +84,5 @@ namespace Pach_OS.Controllers
             ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "IdUsuario", "IdUsuario", compra.IdUsuario);
             return View(compra);
         }
-
     }
 }

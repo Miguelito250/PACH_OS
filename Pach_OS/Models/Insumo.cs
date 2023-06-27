@@ -13,7 +13,7 @@ namespace Pach_OS.Models
 
         public int IdInsumos { get; set; }
         public string? NomInsumo { get; set; }
-        public string? CantInsumo { get; set; }
+        public int? CantInsumo { get; internal set; }
         public int? ProveedoresId { get; set; }
         public string? TiempoLlegado { get; set; }
 
