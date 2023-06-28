@@ -593,7 +593,6 @@ E:\Caterin\GitHub\PACH_OS\Pach_OS\bin\Debug\net6.0\MessagePack.Annotations.dll
 E:\Caterin\GitHub\PACH_OS\Pach_OS\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 E:\Caterin\GitHub\PACH_OS\Pach_OS\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 E:\Caterin\GitHub\PACH_OS\Pach_OS\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
-E:\Caterin\GitHub\PACH_OS\Pach_OS\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.UI.dll
 E:\Caterin\GitHub\PACH_OS\Pach_OS\bin\Debug\net6.0\Microsoft.AspNetCore.Razor.Language.dll
 E:\Caterin\GitHub\PACH_OS\Pach_OS\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
 E:\Caterin\GitHub\PACH_OS\Pach_OS\bin\Debug\net6.0\Microsoft.Build.dll
@@ -617,7 +616,6 @@ E:\Caterin\GitHub\PACH_OS\Pach_OS\bin\Debug\net6.0\Microsoft.EntityFrameworkCore
 E:\Caterin\GitHub\PACH_OS\Pach_OS\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 E:\Caterin\GitHub\PACH_OS\Pach_OS\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
 E:\Caterin\GitHub\PACH_OS\Pach_OS\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
-E:\Caterin\GitHub\PACH_OS\Pach_OS\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Embedded.dll
 E:\Caterin\GitHub\PACH_OS\Pach_OS\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
 E:\Caterin\GitHub\PACH_OS\Pach_OS\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
 E:\Caterin\GitHub\PACH_OS\Pach_OS\bin\Debug\net6.0\Microsoft.Identity.Client.dll
@@ -816,7 +814,6 @@ E:\Caterin\GitHub\PACH_OS\Pach_OS\obj\Debug\net6.0\Pach_OS.GeneratedMSBuildEdito
 E:\Caterin\GitHub\PACH_OS\Pach_OS\obj\Debug\net6.0\Pach_OS.AssemblyInfoInputs.cache
 E:\Caterin\GitHub\PACH_OS\Pach_OS\obj\Debug\net6.0\Pach_OS.AssemblyInfo.cs
 E:\Caterin\GitHub\PACH_OS\Pach_OS\obj\Debug\net6.0\Pach_OS.csproj.CoreCompileInputs.cache
-E:\Caterin\GitHub\PACH_OS\Pach_OS\obj\Debug\net6.0\Pach_OS.MvcApplicationPartsAssemblyInfo.cs
 E:\Caterin\GitHub\PACH_OS\Pach_OS\obj\Debug\net6.0\Pach_OS.MvcApplicationPartsAssemblyInfo.cache
 E:\Caterin\GitHub\PACH_OS\Pach_OS\obj\Debug\net6.0\Pach_OS.RazorAssemblyInfo.cache
 E:\Caterin\GitHub\PACH_OS\Pach_OS\obj\Debug\net6.0\Pach_OS.RazorAssemblyInfo.cs
