@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Pach_OS.Models
 {
-    public partial class Pach_OSContext : DbContext
+    public partial class Pach_OSContext : IdentityDbContext
     {
         public Pach_OSContext()
         {
@@ -403,7 +404,7 @@ namespace Pach_OS.Models
                     .HasForeignKey(d => d.UsuarioId)
 
                     .HasConstraintName("FK__ventas__usuario___7E37BEF6");
-
+                base.OnModelCreating(modelBuilder);
             });
 
             OnModelCreatingPartial(modelBuilder);
