@@ -8,12 +8,7 @@
 
 <h4>DetalleVenta</h4>
 <hr />
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["SuccessMessage"]
-    </div>
-}
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -58,6 +53,7 @@
                 <tr>
                     <th>Producto</th>
                     <th>Cantidad</th>
+                    <th>Total</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -67,7 +63,7 @@
                     <tr>
                         <td>@detalle.Productos.NomProducto</td>
                         <td>@detalle.CantVendida</td>
-                        
+                        <td>@detalle.TotalPrecio</td>
                         <td><a asp-action="Delete" asp-route-id="@detalle.IdDetalleVenta">Delete</a></td>
                     </tr>
                 }

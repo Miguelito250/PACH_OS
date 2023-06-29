@@ -28,7 +28,6 @@ namespace Pach_OS.Controllers
         // GET: Insumos/Create
         public IActionResult Create()
         {
-            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "IdProveedor", "Nit");
             return View();
         }
 
