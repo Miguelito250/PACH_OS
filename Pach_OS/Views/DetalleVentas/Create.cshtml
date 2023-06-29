@@ -58,7 +58,6 @@
                 <tr>
                     <th>Producto</th>
                     <th>Cantidad</th>
-                    <th>Total</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -68,7 +67,7 @@
                     <tr>
                         <td>@detalle.Productos.NomProducto</td>
                         <td>@detalle.CantVendida</td>
-                        <td>@detalle.TotalPrecio</td>
+                        
                         <td><a asp-action="Delete" asp-route-id="@detalle.IdDetalleVenta">Delete</a></td>
                     </tr>
                 }
