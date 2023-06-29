@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Pach_OS.Models;
-using Pach_OS.Models.ViewModels;
 using System.Diagnostics;
+using Pach_OS.Models.ViewModels;
 
 namespace Pach_OS.Controllers
 {
@@ -33,11 +34,17 @@ namespace Pach_OS.Controllers
         {
             return View();
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        //public IActionResult Index()
+        //{
+        //    if (!User.Identity.IsAuthenticated)
+        //    {
+        //        return Redirect("/Identity/Account/Login");
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

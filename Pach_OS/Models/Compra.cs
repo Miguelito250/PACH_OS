@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Pach_OS.Models
 {
@@ -10,6 +11,7 @@ namespace Pach_OS.Models
             DetallesCompras = new HashSet<DetallesCompra>();
         }
 
+        [Key]
         public int IdCompras { get; set; }
         public int? IdUsuario { get; set; }
         public DateTime? FechaCompra { get; set; }

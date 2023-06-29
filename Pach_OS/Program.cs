@@ -10,6 +10,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<Pach_OSContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<Pach_OSContext>();
+
 
 var app = builder.Build();
 
@@ -22,14 +25,39 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
+
+app.UseAuthentication();
+
+app.Use(async (context, next) =>
+{
+    // Verificar si el usuario no está autenticado
+    if (!context.User.Identity.IsAuthenticated)
+    {
+        // Verificar si la solicitud no está en la página de Login o Registro
+        if (context.Request.Path != "/Identity/Account/Login" && context.Request.Path != "/Identity/Account/Register")
+        {
+            // Redirigir a la página de Login
+            context.Response.Redirect("/Identity/Account/Login");
+            return;
+        }
+    }
+
+    // Si el usuario está autenticado o la solicitud está en la página de Login o Registro,
+    // continuar con el siguiente middleware
+    await next.Invoke();
+});
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();
