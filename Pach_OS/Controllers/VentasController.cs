@@ -111,6 +111,7 @@ namespace Pach_OS.Controllers
                     }
                     else
                     {
+                        TempData["SuccessMessage"] = "El pago es menor a la venta";
                         return View();
                     }
                 }

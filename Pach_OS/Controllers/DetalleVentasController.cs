@@ -80,7 +80,7 @@ namespace Pach_OS.Controllers
 
                         if (cantidadNecesaria > cantidadInsumo)
                         {
-                            ModelState.AddModelError("", $"No hay suficientes insumos ({insumo?.NomInsumo}) disponibles para este producto.");
+                            TempData["SuccessMessage"] = $"No hay suficientes insumos ({insumo?.NomInsumo})";
                             return RedirectToAction("Create", "DetalleVentas", new { ventaId = detalleVenta.VentaId });
                         }
 
