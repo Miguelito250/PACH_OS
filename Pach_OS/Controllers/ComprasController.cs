@@ -66,6 +66,7 @@ namespace Pach_OS.Controllers
         public IActionResult CreateDetalles()
         {
             ViewData["InsumosId"] = new SelectList(_context.Insumos, "IdInsumos", "IdInsumos");
+            ViewData["ComprasId"] = new SelectList(_context.Compras, "IdCompras", "IdCompras");
             return View();
         }
 
@@ -103,6 +104,7 @@ namespace Pach_OS.Controllers
             }
 
             ViewData["InsumosId"] = new SelectList(_context.Insumos, "NomInsumo", "NomInsumo", detalle.InsumosId);
+            ViewData["ComprasId"] = new SelectList(_context.Compras, "IdCompras", "IdCompras", detalle.ComprasId);
             return RedirectToAction("Index");
         }
     }

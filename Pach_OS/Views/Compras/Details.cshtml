@@ -59,23 +59,34 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.DetallesCompras)
+                @if (ViewBag.InsumosProveedor != null && ViewBag.InsumosProveedor.Count > 0)
+                {
+                    @foreach (var item in Model.DetallesCompras)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdDetallesCompras)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Insumos.NomInsumo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cantidad)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PrecioInsumo)
+                            </td>
+                        </tr>
+                    }
+                }
+                else
                 {
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IdDetallesCompras)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Insumos.NomInsumo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Cantidad)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PrecioInsumo)
-                        </td>
+                        <td colspan="4">No hay datos disponibles</td>
                     </tr>
                 }
+
+                
             </tbody>
         </table>
     </div>
