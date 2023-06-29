@@ -28,6 +28,7 @@ namespace Pach_OS.Controllers
         // GET: Insumos/Create
         public IActionResult Create()
         {
+            ViewData["ProveedoresId"] = new SelectList(_context.Proveedores, "IdProveedor", "IdProveedor");
             return View();
         }
 
@@ -42,6 +43,7 @@ namespace Pach_OS.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Compras");
             }
+            ViewData["ProveedoresId"] = new SelectList(_context.Proveedores, "Nit", "Nit", insumo.ProveedoresId);
             return RedirectToAction("Index", "Compras");
         }
     }
