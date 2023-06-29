@@ -33,7 +33,6 @@
                 <th>Id Insumo</th>
                 <th>Nombre Insumo</th>
                 <th>Cantidad Insumo</th>
-                <th>Tiempo</th>
             </tr>
         </thead>
         <tbody>
@@ -42,10 +41,9 @@
         foreach (var proveedor in ViewBag.InsumosProveedor)
         {
             <tr>
-                <td>@proveedor.Insumos.IdInsumos</td>
-                <td>@proveedor.Insumos.NomInsumo</td>
-                <td>@proveedor.Insumos.CantInsumo</td>
-                <td>@proveedor.Insumos.TiempoLlegado</td>
+                <td>@proveedor.IdInsumos</td>
+                <td>@proveedor.NomInsumo</td>
+                <td>@proveedor.CantInsumo</td>
             </tr>
         }
         }

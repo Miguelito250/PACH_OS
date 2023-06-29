@@ -29,8 +29,10 @@
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
-        <div id="tablaProductosInsumo">
-            <table>
+    </div>
+    <div class="col-md-8">
+        <h4>Receta</h4>
+        <table class="table">
                 <thead>
                     <tr>
                         <th>producto</th>
@@ -47,16 +49,16 @@
                             <td>@detalle.ProductosId</td>
                             <td>@detalle.InsumosId</td>
                             <td>@detalle.CantInsumo</td>
-                            <td><a asp-action="Delete" asp-route-id="@detalle.Id">Delete</a></td>
+                            <td><a asp-action="Delete" asp-route-id="@detalle.Id" asp-route-ProductosId="@detalle.ProductosId">Delete</a></td>
                         </tr>
                     }
                 </tbody>
             </table>
-
         </div>
-    </div>
-    <a asp-action="Index">volver</a>
+        
 </div>
+    <a asp-action="Index">volver</a>
+
 <script>
     $(function () {
         $('#createForm').submit(function (e) {

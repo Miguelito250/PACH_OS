@@ -24,6 +24,10 @@ namespace Pach_OS.Controllers
         {
             return RedirectToAction("Index", "Productoes");
         }
+        public async Task<IActionResult> ProductosCreate()
+        {
+            return RedirectToAction("Create");
+        }
 
         // GET: ProductosInsumoes/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -45,6 +49,7 @@ namespace Pach_OS.Controllers
             return View(productosInsumo);
         }
 
+     
         // GET: ProductosInsumoes/Create
         public IActionResult Create(int id )
         {
@@ -134,7 +139,7 @@ namespace Pach_OS.Controllers
         }
 
         // GET: ProductosInsumoes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, int? ProductosId)
         {
             if (id == null || _context.ProductosInsumos == null)
             {
@@ -156,8 +161,9 @@ namespace Pach_OS.Controllers
         // POST: ProductosInsumoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, int ProductosId)
         {
+
             if (_context.ProductosInsumos == null)
             {
                 return Problem("Entity set 'Pach_OSContext.ProductosInsumos'  is null.");
@@ -169,7 +175,7 @@ namespace Pach_OS.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Create", new { id = productosInsumo.ProductosId = ProductosId });
         }
 
         private bool ProductosInsumoExists(int id)
