@@ -35,7 +35,7 @@ namespace WebApplication1.Controllers
 
             ViewBag.IdInsumos = id;
             ViewData["InsumosId"] = new SelectList(_context.Insumos, "IdInsumos", "IdInsumos");
-            var insumosProveedor = _context.Proveedores.Where(d => d.IdProveedor == id).ToList();
+            var insumosProveedor = _context.Insumos.Where(d => d.ProveedoresId == id).ToList();
             ViewBag.InsumosProveedor = insumosProveedor;
 
             var proveedore = await _context.Proveedores
