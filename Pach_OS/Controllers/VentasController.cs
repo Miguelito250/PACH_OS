@@ -104,8 +104,15 @@ namespace Pach_OS.Controllers
             {
                 try
                 {
-                    _context.Update(venta);
-                    await _context.SaveChangesAsync();
+                    if(venta.Pago >= venta.TotalVenta)
+                    {
+                        _context.Update(venta);
+                        await _context.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        return View();
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
